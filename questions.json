@@ -1,0 +1,62 @@
+[
+  {
+      "id": 1,
+      "question": "What does Node.js use to manage asynchronous operations?",
+      "options": ["Promises", "Callbacks", "Async/Await", "All of the above"],
+      "correctAnswer": 3
+  },
+  {
+    "id": 2,
+    "question": "Which of the following is NOT a core module in Node.js?",
+    "options": ["fs", "http", "path", "jquery"],
+    "correctAnswer": 4
+  },
+  {
+    "id": 3,
+    "question": "What is the purpose of the 'require' function in Node.js?",
+    "options": ["To define a new variable", "To include a module", "To create an object", "To execute a callback function"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 4,
+    "question": "Which event is emitted when an error occurs during data reading in a stream in Node.js?",
+    "options": ["data", "error", "end", "close"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 5,
+    "question": "What is the event loop in Node.js?",
+    "options": ["A thread for handling asynchronous operations", "A loop that iterates through an array of events", "A mechanism that allows Node.js to perform non-blocking I/O operations", "A queue of events to be processed"],
+    "correctAnswer": 4
+  },
+  {
+    "id": 6,
+    "question": "Which of the following is a correct way to handle asynchronous operations in Node.js?",
+    "options": ["Using callbacks", "Using synchronous functions", "Using loops", "Using global variables"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 7,
+    "question": "What is the purpose of the 'process' object in Node.js?",
+    "options": ["To provide information about the current process", "To terminate the current process", "To access command-line arguments", "All of the above"],
+    "correctAnswer": 4
+  },
+  {
+    "id": 8,
+    "question": "Which method is used to import a module in Node.js?",
+    "options": ["import", "require", "include", "load"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 9,
+    "question": "What is the purpose of the 'fs' module in Node.js?",
+    "options": ["To handle file system operations", "To format strings", "To create HTTP servers", "To handle HTTP requests"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 10,
+    "question": "Which of the following is NOT a valid way to create a readable stream in Node.js?",
+    "options": ["fs.createReadStream", "http.get", "process.stdin", "stream.createReadableStream"],
+    "correctAnswer": 4
+  }
+]

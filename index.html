@@ -1,0 +1,92 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Quiz</title>
+</head>
+<body>
+    <h1>Node.js Quiz</h1>
+    <div id="quiz-container">
+        <div id="question-container"></div>
+        <div id="options-container"></div>
+        <button onclick="submitAnswer()">Submit Answer</button>
+    </div>
+    <div id="score" style="display: none;">
+        <h2>Score</h2>
+        <div id="result"></div>
+        <h2>Answer Key</h2>
+        <div id="answer-key"></div>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+
+        async function loadQuestions() {
+            const response = await fetch('/questions');
+            questions = await response.json();
+            showQuestion()
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestionIndex];
+            const questionContainer = document.getElementById('question-container');
+            const optionsContainer = document.getElementById('options-container');
+            questionContainer.innerHTML = question.question;
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const radioBtn = document.createElement('input');
+                radioBtn.type = 'radio';
+                radioBtn.name = 'option';
+                radioBtn.value = index + 1;
+                optionsContainer.appendChild(radioBtn);
+                optionsContainer.appendChild(document.createTextNode(option));
+                optionsContainer.appendChild(document.createElement('br'));
+            });
+        }
+
+        async function submitAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (!selectedOption) {
+                alert('Please select an option');
+                return;
+            }
+            const userAnswer = selectedOption.value;
+            const response = await fetch('/answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ questionId: questions[currentQuestionIndex].id, userAnswer })
+            });
+            const result = await response.json();
+            if (result.isCorrect) {
+                correctAnswers++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            const scoreElement = document.getElementById('score');
+            const resultElement = document.getElementById('result');
+            const answerKeyElement = document.getElementById('answer-key');
+            scoreElement.style.display = 'block';
+            resultElement.innerHTML = `You scored ${correctAnswers} out of ${questions.length}`;
+            answerKeyElement.innerHTML = '';
+            questions.forEach((question) => {
+                answerKeyElement.innerHTML += `<p>${question.question} - Correct answer: ${question.options[question.correctAnswer - 1]}</p>`;
+            });
+        }
+
+        loadQuestions();
+    </script>
+</body>
+</html>
